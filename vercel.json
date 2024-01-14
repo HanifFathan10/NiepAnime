@@ -1,10 +1,28 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/*", "use": "@vercel/node" },
-    { "src": "prisma/*", "use": "@prisma/cli" }
+    {
+      "src": "next.config.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "/.*",
+      "dest": "index.js",
+      "use": "@vercel/node"
+    }
   ],
-  "build": {
-    "postinstall": "prisma generate"
-  }
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
