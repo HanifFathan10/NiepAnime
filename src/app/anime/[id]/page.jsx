@@ -7,6 +7,7 @@ import { authUserSession } from "@/libs/auth-libs";
 import prisma from "@/libs/prisma";
 import CommentInput from "@/components/AnimeList/CommentInput/CommentInput";
 import CommentBox from "@/components/AnimeList/CommentBox";
+import AllDataAnime from "@/components/AnimeList/AllDataAnime";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
@@ -16,41 +17,47 @@ const Page = async ({ params: { id } }) => {
   });
   return (
     <>
-      <div className="pt-4 px-4">
-        <h3 className="text-3xl text-color-primary">
-          {anime.data.title} {anime.data.year ? "-" : ""} {anime.data.year}
-        </h3>
-        {!collection && user && (
-          <CollectionButton
-            anime_mal_id={id}
-            user_email={user?.email}
-            anime_image={anime.data.images.webp.image_url}
-            anime_title={anime.data.title}
+      <div
+        className="w-full h-[380px] bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${anime.data.images.webp.large_image_url})`,
+        }}
+      ></div>
+      <div className="container grid grid-flow-row md:grid-flow-col px-4 gap-3">
+        <div className="md:col-span-4 flex md:flex-col justify-center gap-x-2 space-y-2">
+          <Image
+            src={anime.data.images.webp.image_url}
+            alt={anime.data.images.jpg.image_url}
+            width={300}
+            height={350}
+            fetchPriority="high"
+            className="w-fit h-56 md:h-96 rounded-md object-cover -mt-44 bg-center bg-cover aspect-auto"
           />
-        )}
-      </div>
-      <div className="pt-4 px-4 flex gap-2 text-color-primary">
-        <div className="w-36 flex flex-col justify-center items-center rounded border border-color-primary">
-          <h3>PERINGKAT</h3>
-          <h3>{anime.data.rank}</h3>
+          {!collection && user && (
+            <CollectionButton
+              anime_mal_id={id}
+              user_email={user?.email}
+              anime_image={anime.data.images.webp.image_url}
+              anime_title={anime.data.title}
+            />
+          )}
         </div>
-        <div className="w-36 flex flex-col justify-center items-center rounded border border-color-primary">
-          <h3>SKOR</h3>
-          <h3>{anime.data.score}</h3>
+        <div className="md:col-span-6 flex flex-col text-color-light py-4 gap-y-2">
+          <h1 className="text-base sm:text-xl md:text-3xl font-bold">
+            {anime.data.title}
+          </h1>
+          <p className=" w-full text-xs md:text-[14px]">
+            {anime.data.synopsis}
+          </p>
+          <h1 className="">(Source: {anime.data.source})</h1>
         </div>
       </div>
-      <div className="pt-4 -x-4 flex ga-2 text-color-primary">
-        <Image
-          src={anime.data.images.webp.image_url}
-          alt={anime.data.images.jpg.image_url}
-          width={300}
-          height={350}
-          className="w-full max-h-64 object-cover"
-        />
-        <p className="p-4 ">{anime.data.synopsis}</p>
-      </div>
+      <AllDataAnime anime={anime} key={anime.mal_id} />
+      <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
       <div className="p-4">
-        <h3 className="text-lg text-color-primary">Komentar Penonton</h3>
+        <h3 className="text-lg font-bold text-color-primary">
+          Komentar Penonton
+        </h3>
         <CommentBox anime_mal_id={id} />
         {user && (
           <CommentInput
@@ -58,12 +65,8 @@ const Page = async ({ params: { id } }) => {
             user_email={user?.email}
             username={user?.name}
             anime_title={anime.data.title}
-            // rating={}
           />
         )}
-      </div>
-      <div className="">
-        <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
       </div>
     </>
   );

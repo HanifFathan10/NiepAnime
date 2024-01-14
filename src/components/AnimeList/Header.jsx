@@ -3,12 +3,12 @@ import React from "react";
 
 const Header = ({ title, linkHref, linkTitle }) => {
   return (
-    <div className="flex justify-between items-center text-color-primary p-4">
-      <h1 className="text-2xl font-bold">{title}</h1>
+    <div className="flex justify-between items-center text-color-primary px-4 pt-6 pb-4">
+      <h1 className="text-md md:text-xl font-bold uppercase">{title}</h1>
       {linkHref && linkTitle ? (
         <Link
           href={linkHref}
-          className="text-md md:text-xl underline hover:text-color-accent transition-all"
+          className="text-sm md:text-lg underline hover:text-color-accent transition-all lowercase"
         >
           {linkTitle}
         </Link>

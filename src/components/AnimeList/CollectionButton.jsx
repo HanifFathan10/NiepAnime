@@ -1,4 +1,5 @@
 "use client";
+import { Plus } from "@phosphor-icons/react";
 import React, { useState } from "react";
 
 const CollectionButton = ({
@@ -24,13 +25,14 @@ const CollectionButton = ({
   return (
     <>
       {isCreated ? (
-        <p className="text-color-primary">Berhasil ditambahkan ke collection</p>
+        <p className="text-color-green">Berhasil ditambahkan ke collection</p>
       ) : (
         <button
           onClick={handleCollection}
-          className="px-2 py-1 bg-color-accent rounded-lg"
+          className="flex gap-x-1 justify-center items-center text-xs font-semibold py-2 px-3 bg-color-accent text-color-dark rounded-md hover:text-color-primary hover:bg-color-dark transition-all"
         >
           Add To Collection
+          <Plus size={18} weight="bold" />
         </button>
       )}
     </>

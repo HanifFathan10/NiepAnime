@@ -10,7 +10,7 @@ const Header = ({ title }) => {
     router.back();
   };
   return (
-    <div className="flex justify-between item-center mb-4">
+    <div className="flex justify-between item-center px-4 py-3">
       <button className="text-color-primary" onClick={handleBack}>
         <ArrowSquareLeft size={32} />
       </button>

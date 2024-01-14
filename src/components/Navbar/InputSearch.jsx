@@ -19,14 +19,14 @@ const InputSearch = () => {
   };
   return (
     <div className="relative">
-      <form>
+      <form className="">
         <input
           type="text"
           placeholder="Cari Anime"
           ref={searchRef}
           name="search"
           id="search"
-          className="p-2 rounded-lg w-full"
+          className="p-2 rounded-lg max-w-fit"
         />
         <button className="absolute top-2 end-2" onClick={handleSearch}>
           <MagnifyingGlass size={24} />

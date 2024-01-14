@@ -15,12 +15,13 @@ module.exports = {
     },
     colors: {
       color: {
-        primary: "#eeeeee",
-        accent: "#ffc639",
+        primary: "#ffffff",
         secondary: "#393e46",
-        dark: "#222831",
+        accent: "#86ABCF",
+        green: "#5efa0a",
+        light: "#ffffff",
+        dark: "#212121",
       },
     },
   },
-  plugins: [],
 };

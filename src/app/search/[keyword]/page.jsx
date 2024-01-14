@@ -6,7 +6,7 @@ const Page = async ({ params }) => {
   const decodedKeyowrd = decodeURI(keyword);
   const searchAnime = await getAnimeResponse("anime", `q=${decodedKeyowrd}`);
   return (
-    <section>
+    <section className="min-h-screen">
       <Header title={`Pencarian untuk ${decodedKeyowrd}...`} />
       <AnimeList api={searchAnime} />
     </section>

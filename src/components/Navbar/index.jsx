@@ -5,15 +5,20 @@ import UserActionButton from "./UserActionButton";
 
 const Navbar = () => {
   return (
-    <header className="bg-color-accent">
-      <div className="flex md:flex-row flex-col justify-between md:items-center p-4 gap-2">
-        <Link href={"/"} className="text-2xl font-bold">
-          Cuy AnimeList
+    <nav className="bg-color-accent w-full shadow-md">
+      <div className="flex flex-col md:flex-row justify-between md:items-center px-4 py-2 gap-2">
+        <Link
+          href="/"
+          className="hidden md:block text-xl md:text-2xl font-bold text-color-primary"
+        >
+          AnimeList
         </Link>
-        <InputSearch />
-        <UserActionButton />
+        <div className="flex gap-2 justify-between items-center">
+          <InputSearch />
+          <UserActionButton />
+        </div>
       </div>
-    </header>
+    </nav>
   );
 };
 
